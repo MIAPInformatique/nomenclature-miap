@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #242933;
+}
+
+* {
+	box-sizing: border-box;
+}
+.title { 
+	color: var(--tw-prose-headings);
+	font-weight: 800;
+	font-size: 2.25em;
+	margin-top: 0px;
+	line-height: 1.11111;
+}
+
+.alert.hiddenAlert {
+	/* Other Tailwind CSS classes */
+	opacity: 0;
+	transform: translateY(-100%);
+	transition-property: opacity, transform;
+	transition-duration: 300ms;
+  }
+
+  .alert.blockAlert {
+	opacity: 1;
+	transform: translateY(0);
+	transition-property: opacity, transform;
+	transition-duration: 300ms;
+  }

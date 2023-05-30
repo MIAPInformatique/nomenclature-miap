@@ -7,7 +7,6 @@ html, body {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	background-color: #242933;
 }
 
 * {
@@ -35,3 +34,20 @@ html, body {
 	transition-property: opacity, transform;
 	transition-duration: 300ms;
   }
+
+  @media (prefers-color-scheme: dark) {
+	html,body {
+	  color-scheme: dark;
+	  background-color: #242933;
+	}
+  }
+  
+  /* If the user prefers light mode, 
+  we still enforce color-scheme: dark, despite the user preference */
+  @media (prefers-color-scheme: light) {
+	html,body {
+	  color-scheme: dark;
+	  background-color: #e0e0e0;
+	}
+  }
+  

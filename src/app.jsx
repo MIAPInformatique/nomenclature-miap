@@ -1,10 +1,66 @@
 import { useState} from "preact/hooks";
 
 export function App(props) {
-  const [activeItem, setActiveItem] = useState(null);
+
+  // Definition des constantes pour chaque catégorie
+
+  const typePoste = [
+    {
+      code : "F",
+      icon : "fa-computer",
+      name : "Fixe"
+    },
+    {
+      code : "P",
+      icon : "fa-laptop",
+      name : "Portable"
+    },
+    {
+      code : "S",
+      icon : "fa-server",
+      name : "Serveur"
+    },
+    {
+      code : "M",
+      icon : "fa-brands fa-apple",
+      name : "Mac"
+    }
+  ]
+
+  const marquePoste = [
+    {
+      code : "AS",
+      name : "Asus"
+    },{
+      code : "DE",
+      name : "Dell"
+
+    },{
+      code : "NO",
+      name : "No name"
+    },{ 
+      // NE PAS SUPPRIMER CET ITEM
+      code : "CU",
+      name : "Custom"
+      // CHAMP PERSONNALISÉ
+    }
+  ]
+
+  const sexeUtilisateur = [
+    {
+      code : "H",
+      icon : "fa-mars",
+      name : "Homme"
+    },{
+      code : "F",
+      icon : "fa-venus",
+      name : "Femme"
+    }
+  ]
+
+  const [activeItem, setActiveItem] = useState(typePoste[0]);
   const [activeBrand, setActiveBrand] = useState(null);
   const [activeSexe, setActiveSexe] = useState(null);
-  // const [inputValue, setInputValue] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
@@ -19,7 +75,7 @@ export function App(props) {
   const [values, setValues] = useState(initialInputValue);
 
   const handleItemClick = (index) => {
-    setActiveItem(index);
+    setActiveItem(typePoste[index]);
   };
 
   const handleBrandClick = (index) => {
@@ -52,6 +108,9 @@ export function App(props) {
   };
 
 
+  
+
+
   let type, marque, sexe;
 
   return (
@@ -66,43 +125,16 @@ export function App(props) {
             <h2 className="label-text text-xl">Type de poste</h2>
           </label>
           <ul className="menu bg-base-100 w-56 rounded-box  ">
-            <li>
-              <a
-                className={activeItem === 0 ? "active" : ""}
-                onClick={() => handleItemClick(0)}
-              >
-                {" "}
-                <i class="fa-solid fa-computer"></i> Fixe
-              </a>
-            </li>
-            <li>
-              <a
-                className={activeItem === 1 ? "active" : ""}
-                onClick={() => handleItemClick(1)}
-              >
-                {" "}
-                <i class="fa-solid fa-laptop"></i> Portable
-              </a>
-            </li>
-            <li>
-              <a
-                className={activeItem === 2 ? "active" : ""}
-                onClick={() => handleItemClick(2)}
-              >
-                {" "}
-                <i class="fa-solid fa-server"></i>Serveur
-              </a>
-            </li>
-            <li>
-              <a
-                className={activeItem === 3 ? "active" : ""}
-                onClick={() => handleItemClick(3)}
-              >
-                {" "}
-                <i class="fa-brands fa-apple"></i>Mac
-              </a>
-            </li>
+{/* Génération automatique type */}
+            {typePoste.map((item, index) => (
+              <li key={index}>
+                <a className={activeItem === index ? "active" : ""} onClick={() => handleItemClick(index)}>
+                  <i class={`fa-solid ${item.icon}`}></i> {item.name}
+                </a>
+              </li>
+            ))}
           </ul>
+
         </div>
 
         <div>
@@ -133,54 +165,14 @@ export function App(props) {
             <h2 className="label-text text-xl">Marque du poste</h2>
           </label>
           <ul className="menu bg-base-100 w-56 rounded-box  ">
-            <li>
-              <a
-                className={activeBrand === 0 ? "active" : ""}
-                onClick={() => handleBrandClick(0)}
-              >
-                {" "}
-                Asus
-              </a>
-            </li>
-            <li>
-              <a
-                className={activeBrand === 1 ? "active" : ""}
-                onClick={() => handleBrandClick(1)}
-              >
-                {" "}
-                Dell
-              </a>
-            </li>
-            <li>
-              <a
-                className={activeBrand === 2 ? "active" : ""}
-                onClick={() => handleBrandClick(2)}
-              >
-                {" "}
-                No name
-              </a>
-            </li>
-            <li>
-            
-            {/* {activeBrand === 3 ? (
-              <input name="firstName" type="text"
-              id="autreMarque"
-              placeholder="Autre.."
-              className="input w-full max-w-xs" onInput={handleChange} />
-              ) : (
-                <a onClick={() => handleBrandClick(3)}>Autre..</a>
-              )} */}
-
-
-              {activeBrand === 3 ? (
-              <input type="text"
-              id="autreMarque"
-              placeholder="Autre.."
-              className="input w-full max-w-xs" onInput={handleInputChange} name="brandName" />
-              ) : (
-                <a onClick={() => handleBrandClick(3)}>Autre..</a>
-              )}
-            </li>
+{/* Génération automatique marque */}
+            {marquePoste.map((item, index) => (
+              <li>
+                <a className={activeBrand === index ? "active" : ""} onClick={() => handleBrandClick(index)}>
+                  {item.name}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -210,31 +202,21 @@ export function App(props) {
             <h2 className="label-text text-xl">Sexe de l'utilisaeur</h2>
           </label>
           <ul className="menu bg-base-100 w-56 rounded-box  ">
-            <li>
-              <a
-                className={activeSexe === 0 ? "active" : ""}
-                onClick={() => handleSexeClick(0)}
-              >
-                {" "}
-                <i class="fa-solid fa-mars"></i> Homme
-              </a>
-            </li>
-            <li>
-              <a
-                className={activeSexe === 1 ? "active" : ""}
-                onClick={() => handleSexeClick(1)}
-              >
-                {" "}
-                <i class="fa-solid fa-venus"></i> Femme
-              </a>
-            </li>
+{/* Génération automatique sexe */}
+            {sexeUtilisateur.map((item, index) => (
+              <li>
+                <a className={activeSexe === index ? "active" : ""} onClick={() => handleSexeClick(index)}>
+                  <i class={`fa-solid ${item.icon}`}></i> {item.name}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </article>
 
       <div className="navbar bg-base-100 container mx-auto mt-10 rounded-box">
         <a className="btn btn-ghost normal-case text-xl" onClick={handleAlertToggle} id="result" >
-        {
+        {/* {
             (type =
               activeItem === 0
                 ? "F"
@@ -245,6 +227,11 @@ export function App(props) {
                 : activeItem === 3
                 ? "M"
                 : "F")
+          } */}
+          {
+            (type =
+              activeItem.code
+            )
           }
           {'-'}
           {values.companyName.substring(0, 2).toUpperCase()}

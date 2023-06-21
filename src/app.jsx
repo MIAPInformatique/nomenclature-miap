@@ -67,7 +67,7 @@ export function App(props) {
   const initialInputValue = {
     companyName: "Miap Informatique",
     postNumber: "1",
-    brandName: "Custom",
+    brandName: "Asus",
     firstName: "v",
     lastName: "k"
   };
@@ -165,7 +165,7 @@ export function App(props) {
             <h2 className="label-text text-xl">Marque du poste</h2>
           </label>
           <ul className="menu bg-base-100 w-56 rounded-box  ">
-{/* Génération automatique marque */}
+        {/* Génération automatique marque */}
             {marquePoste.map((item, index) => (
               <li>
                 <a className={activeBrand === index ? "active" : ""} onClick={() => handleBrandClick(index)}>
@@ -173,6 +173,17 @@ export function App(props) {
                 </a>
               </li>
             ))}
+              {/* Marque personnalisée */}
+            {activeBrand === marquePoste.length - 1 ? (
+              <li>
+                <input
+                  type="text"
+                  placeholder="Clevo.."
+                  onInput={handleInputChange} name="brandName"
+                  className="  input w-full max-w-xs"
+                />
+              </li>
+            ) : null}
           </ul>
         </div>
 

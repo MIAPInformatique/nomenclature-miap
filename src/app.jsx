@@ -239,13 +239,8 @@ export function App(props) {
                 ? "M"
                 : "F")
           } */}
-          {
-            (type =
-              activeItem.code
-            )
-          }
-          {'-'}
-          {values.companyName.substring(0, 2).toUpperCase()}
+
+          {values.companyName.substring(0, 3).toUpperCase()}
           {values.postNumber}
 
 
@@ -274,6 +269,12 @@ export function App(props) {
           }
 
           {Math.floor(Math.random() * 9) + 1}
+
+          {
+            (type =
+              activeItem.code
+            )
+          }
 
         </a>
       </div>
